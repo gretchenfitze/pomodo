@@ -1,12 +1,12 @@
 import React from 'react';
-import Timer from '../components/Timer';
+import TimerContainer from './TimerContainer';
 import Todos from '../components/Todos';
 
 
 const App = () => (
   <div>
-    <Timer />
-    <Todos />
+    <TimerContainer />
+
   </div>
 );
 
