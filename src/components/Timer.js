@@ -1,22 +1,17 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
 
-const Timer = ({ timer }) => (
+const Timer = ({ timerType, minutes, seconds }) => (
   <div>
-    Action: {timer.timerType} for {timer.min}:{timer.sec}
+    <h2>{timerType} for</h2>
+    <h1>{minutes < 10 ? `0${minutes}` : minutes}:
+      {seconds < 10 ? `0${seconds}` : seconds}</h1>
   </div>
 );
 
 Timer.propTypes = {
-  timer: PropTypes.shape({
-    timerType: PropTypes.string.isRequired,
-    min: PropTypes.number.isRequired,
-    sec: PropTypes.number.isRequired,
-  }).isRequired,
+  timerType: PropTypes.string.isRequired,
+  minutes: PropTypes.number.isRequired,
+  seconds: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = state => ({
-  timer: state.timer,
-});
-
-export default connect(mapStateToProps)(Timer);
+export default Timer;
