@@ -10,3 +10,7 @@ export const toggleTimer = () => ({
 export const timerTick = () => ({
   type: 'TICK',
 });
+
+export const timerStop = () => ({
+  type: 'STOP',
+});

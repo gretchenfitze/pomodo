@@ -21,18 +21,24 @@ const timer = (state = initialState, action) => {
         ...state,
         timerType: action.timerType,
         minutes: getMinutesForTimer(action.timerType),
+        seconds: 0,
         active: false,
       };
     case 'TICK':
       return {
         ...state,
-        minutes: action.minutes,
-        seconds: action.seconds,
+        minutes: !state.seconds ? state.minutes - 1 : state.minutes,
+        seconds: !state.seconds ? 59 : state.seconds - 1,
       };
     case 'TOGGLE_TIMER':
       return {
         ...state,
         active: !state.active,
+      };
+    case 'STOP':
+      return {
+        ...state,
+        active: false,
       };
     default:
       return state;
