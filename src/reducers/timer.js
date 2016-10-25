@@ -1,44 +1,31 @@
+import { RESET, TOGGLE_TIMER, TICK, STOP } from '../constants/TimerConst';
+
 const initialState = {
+  timerType: 'work',
   minutes: 25,
   seconds: 0,
-  timerType: 'Work',
   active: false,
-};
-
-const getMinutesForTimer = (timerType) => {
-  switch (timerType) {
-    case 'Work': return 25;
-    case 'Short break': return 5;
-    case 'Long break': return 15;
-    default: throw new Error(`Unknown timer type: ${timerType}.`);
-  }
 };
 
 const timer = (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_TIMER_TYPE':
+    case RESET:
       return {
         ...state,
-        timerType: action.timerType,
-        minutes: getMinutesForTimer(action.timerType),
+        minutes: action.minutes,
         seconds: 0,
         active: false,
       };
-    case 'TICK':
+    case TICK:
       return {
         ...state,
         minutes: !state.seconds ? state.minutes - 1 : state.minutes,
         seconds: !state.seconds ? 59 : state.seconds - 1,
       };
-    case 'TOGGLE_TIMER':
+    case TOGGLE_TIMER:
       return {
         ...state,
         active: !state.active,
-      };
-    case 'STOP':
-      return {
-        ...state,
-        active: false,
       };
     default:
       return state;

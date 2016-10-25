@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react';
 
-const TimerType = ({ children, onClick }) => (
+const TimerButton = ({ children, onClick }) => (
   <div>
     <button onClick={onClick}> {children} </button>
   </div>
 );
 
-TimerType.propTypes = {
-  children: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+TimerButton.propTypes = {
+  children: PropTypes.any,
+  onClick: PropTypes.func,
 };
 
-export default TimerType;
+export default TimerButton;
