@@ -1,31 +1,64 @@
 import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import * as actions from '../actions/TimerActions';
 import Timer from '../components/Timer';
 import TimerButton from '../components/TimerButton';
+import TimerLink from '../components/TimerLink';
 import notify from '../utilities/notify';
 
 let timerId;
 
+const getMinutesForTimer = (timerType) => {
+  switch (timerType) {
+    case 'work': return 25;
+    case 'short-break': return 5;
+    case 'long-break': return 15;
+    default: throw new Error(`Unknown timer type: ${timerType}.`);
+  }
+};
+
 class TimerContainer extends React.Component {
-  componentDidUpdate(prevProps) {
-    const { minutes, seconds, timerType } = prevProps;
-    if ((!minutes) && (seconds === 1)) {
+  constructor(props) {
+    super(props);
+    const mins = getMinutesForTimer(props.params.timerType || 'work');
+    props.actions.resetTimer(mins);
+    Notification.requestPermission();
+  }
+
+  componentWillReceiveProps({ params, actions }) {
+    if (this.props.params.timerType !== params.timerType) {
       clearInterval(timerId);
-      prevProps.actions.timerStop();
+      actions.resetTimer(getMinutesForTimer(params.timerType));
+    }
+  }
+
+  componentDidUpdate({ minutes, seconds, timerType, actions, params }) {
+    if ((!minutes) && (!seconds)) {
+      clearInterval(timerId);
       notify(timerType);
+      actions.resetTimer(getMinutesForTimer(params.timerType));
     }
   }
 
   render() {
-    const { timerType, minutes, seconds, onTimerChose, onTimerControl, active } = this.props;
+    const { minutes, seconds, onTimerControl, active } = this.props;
     return (
       <div>
-        <TimerButton onClick={() => onTimerChose('Work')}>Work</TimerButton>
-        <TimerButton onClick={() => onTimerChose('Short break')}>Short break</TimerButton>
-        <TimerButton onClick={() => onTimerChose('Long break')}>Long break</TimerButton>
-        <Timer timerType={timerType} minutes={minutes} seconds={seconds} />
+        <TimerButton>
+          <TimerLink timerType="work">Work</TimerLink>
+        </TimerButton>
+
+        <TimerButton>
+          <TimerLink timerType="short-break">Short break</TimerLink>
+        </TimerButton>
+
+        <TimerButton>
+          <TimerLink timerType="long-break">Long break</TimerLink>
+        </TimerButton>
+
+        <Timer minutes={minutes} seconds={seconds} />
         <TimerButton onClick={() => onTimerControl(active)}>
           {active ? 'Pause' : 'Start'}
         </TimerButton>
@@ -35,32 +68,28 @@ class TimerContainer extends React.Component {
 }
 
 TimerContainer.propTypes = {
-  timerType: PropTypes.string.isRequired,
   minutes: PropTypes.number.isRequired,
   seconds: PropTypes.number.isRequired,
   active: PropTypes.bool.isRequired,
-  onTimerChose: PropTypes.func.isRequired,
   onTimerControl: PropTypes.func.isRequired,
+  actions: PropTypes.object.isRequired,
+  params: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => {
-  const { timerType, minutes, seconds, active } = state.timer;
+const mapStateToProps = (state, { params }) => {
+  const { minutes, seconds, active } = state.timer;
+  const { timerType } = params || 'work';
   return { timerType, minutes, seconds, active };
 };
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actions, dispatch),
-  onTimerChose: (timerType) => {
-    clearInterval(timerId);
-    dispatch(actions.setTimerType(timerType));
-  },
   onTimerControl: (active) => {
-    Notification.requestPermission();
+    dispatch(actions.toggleTimer());
     if (!active) timerId = setInterval(() => { dispatch(actions.timerTick()); }, 1000);
     else clearInterval(timerId);
-    dispatch(actions.toggleTimer());
   },
-  timerStop: () => dispatch(actions.timerStop()),
+  resetTimer: () => dispatch(actions.resetTimer()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TimerContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TimerContainer));
