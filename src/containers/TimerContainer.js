@@ -10,11 +10,11 @@ import notify from '../utilities/notify';
 
 let timerId;
 
-const getMinutesForTimer = (timerType) => {
+const getStartingPointForTimer = (timerType) => {
   switch (timerType) {
-    case 'work': return 25;
-    case 'short-break': return 5;
-    case 'long-break': return 15;
+    case 'work': return 25 * 60;
+    case 'short-break': return 5 * 60;
+    case 'long-break': return 15 * 60;
     default: throw new Error(`Unknown timer type: ${timerType}.`);
   }
 };
@@ -22,28 +22,27 @@ const getMinutesForTimer = (timerType) => {
 class TimerContainer extends React.Component {
   constructor(props) {
     super(props);
-    const mins = getMinutesForTimer(props.params.timerType || 'work');
-    props.actions.resetTimer(mins);
+    props.actions.resetTimer(getStartingPointForTimer(props.params.timerType || 'work'));
     Notification.requestPermission();
   }
 
   componentWillReceiveProps({ params, actions }) {
     if (this.props.params.timerType !== params.timerType) {
       clearInterval(timerId);
-      actions.resetTimer(getMinutesForTimer(params.timerType));
+      actions.resetTimer(getStartingPointForTimer(params.timerType));
     }
   }
 
-  componentDidUpdate({ minutes, seconds, timerType, actions, params }) {
-    if ((!minutes) && (!seconds)) {
+  componentDidUpdate({ seconds, timerType, actions, params }) {
+    if (!seconds) {
       clearInterval(timerId);
       notify(timerType);
-      actions.resetTimer(getMinutesForTimer(params.timerType));
+      actions.resetTimer(getStartingPointForTimer(params.timerType));
     }
   }
 
   render() {
-    const { minutes, seconds, onTimerControl, active } = this.props;
+    const { seconds, onTimerControl, active } = this.props;
     return (
       <div>
         <TimerButton>
@@ -58,7 +57,7 @@ class TimerContainer extends React.Component {
           <TimerLink timerType="long-break">Long break</TimerLink>
         </TimerButton>
 
-        <Timer minutes={minutes} seconds={seconds} />
+        <Timer minutes={Math.floor(seconds / 60)} seconds={seconds % 60} />
         <TimerButton onClick={() => onTimerControl(active)}>
           {active ? 'Pause' : 'Start'}
         </TimerButton>
@@ -68,7 +67,6 @@ class TimerContainer extends React.Component {
 }
 
 TimerContainer.propTypes = {
-  minutes: PropTypes.number.isRequired,
   seconds: PropTypes.number.isRequired,
   active: PropTypes.bool.isRequired,
   onTimerControl: PropTypes.func.isRequired,
@@ -77,9 +75,9 @@ TimerContainer.propTypes = {
 };
 
 const mapStateToProps = (state, { params }) => {
-  const { minutes, seconds, active } = state.timer;
+  const { seconds, active } = state.timer;
   const { timerType } = params || 'work';
-  return { timerType, minutes, seconds, active };
+  return { timerType, seconds, active };
 };
 
 const mapDispatchToProps = dispatch => ({
