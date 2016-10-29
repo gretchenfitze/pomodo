@@ -1,8 +1,8 @@
-import { RESET, TOGGLE_TIMER, TICK } from '../constants/TimerConst';
+import { RESET, TOGGLE_TIMER, TICK, SET_TIMER } from '../constants/TimerActionTypes';
 
-export const resetTimer = seconds => ({
+export const resetTimer = timerType => ({
   type: RESET,
-  seconds,
+  timerType,
 });
 
 export const toggleTimer = () => ({
@@ -11,4 +11,9 @@ export const toggleTimer = () => ({
 
 export const timerTick = () => ({
   type: TICK,
+});
+
+export const setTimer = startingTime => ({
+  type: SET_TIMER,
+  startingTime,
 });
