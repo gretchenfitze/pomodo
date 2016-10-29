@@ -1,7 +1,10 @@
 import { createStore } from 'redux';
 import appReducers from '../reducers';
 
-export default function configureStore() {
-  const store = createStore(appReducers);
+export default function configureStore(initialState) {
+  const store = createStore(
+    appReducers,
+    initialState,
+  );
   return store;
 }
