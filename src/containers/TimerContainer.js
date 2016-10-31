@@ -8,8 +8,13 @@ import TimerTypes from '../components/TimerTypes';
 import TimerButton from '../components/TimerButton';
 import TimerSettings from '../components/TimerSettings';
 import notify from '../utilities/notify';
+import SettingsIcon from '../utilities/settings.svg';
 
 let timerId;
+
+const hideSettingsForm = () => {
+  document.querySelector('.timer-settings-form').classList.toggle('invisible');
+};
 
 class TimerContainer extends React.Component {
   constructor({ actions, params }) {
@@ -39,15 +44,19 @@ class TimerContainer extends React.Component {
       <div>
         <TimerTypes />
         <Timer minutes={Math.floor(seconds / 60)} seconds={seconds % 60} />
-        <TimerButton onClick={() => onTimerControl(active)}>
-          {active ? 'Pause' : 'Start'}
-        </TimerButton>
-        <TimerSettings
-          onClick={() => {
-            //
-          }}
-          onSubmit={event => onSubmit(event, timerType)}
-        />
+        <TimerSettings onSubmit={event => onSubmit(event, timerType)} />
+        <div className="timer-footer-wrapper">
+          <TimerButton onClick={event => onTimerControl(event, active)}>
+            {active ? 'Pause' : 'Start'}
+          </TimerButton>
+          <TimerButton
+            onClick={() => {
+              hideSettingsForm();
+            }}
+          >
+            <SettingsIcon height="8vh" width="8vh" />
+          </TimerButton>
+        </div>
       </div>
     );
   }
@@ -59,7 +68,6 @@ TimerContainer.propTypes = {
   onTimerControl: PropTypes.func.isRequired,
   actions: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired,
-  startingTime: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired,
   timerType: PropTypes.string.isRequired,
 };
@@ -72,10 +80,11 @@ const mapStateToProps = (state, { params }) => {
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actions, dispatch),
-  onTimerControl(active) {
+  onTimerControl(event, active) {
     dispatch(actions.toggleTimer());
     if (!active) timerId = setInterval(() => { dispatch(actions.timerTick()); }, 1000);
     else clearInterval(timerId);
+    event.target.classList.toggle('active');
   },
   onSubmit(event, timerType) {
     event.preventDefault();
@@ -87,6 +96,7 @@ const mapDispatchToProps = dispatch => ({
       longBreak: event.target.longBreak.value * 60,
     }));
     dispatch(actions.resetTimer(timerType));
+    hideSettingsForm();
   },
 });
 

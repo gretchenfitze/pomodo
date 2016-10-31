@@ -19,6 +19,10 @@ export default {
       test: /\.js$/,
       loaders: ['babel'],
       include: path.join(__dirname, 'src'),
+    },
+    {
+      test: /\.svg$/,
+      loader: 'babel!react-svg',
     }],
   },
 };

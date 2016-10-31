@@ -5,12 +5,15 @@ const TimerLink = ({ children, timerType }) => (
   <Link
     to={timerType}
     style={{
+      color: '#fff',
       textDecoration: 'none',
     }}
     activeStyle={{
-      color: 'red',
-      textDecoration: 'none',
+      backgroundColor: '#fff',
+      color: '#000',
+      boxShadow: '0 0 25px #fff, 0 0 5px #fff',
     }}
+    className="timer-type timer-button"
   >
     {children}
   </Link>

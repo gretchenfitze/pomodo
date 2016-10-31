@@ -1,9 +1,7 @@
 import React, { PropTypes } from 'react';
 
 const TimerButton = ({ children, onClick }) => (
-  <div>
-    <button onClick={onClick}> {children} </button>
-  </div>
+  <button className="timer-button" onClick={onClick}> {children} </button>
 );
 
 TimerButton.propTypes = {
