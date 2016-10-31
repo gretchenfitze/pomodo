@@ -79,6 +79,8 @@ const mapDispatchToProps = dispatch => ({
   },
   onSubmit(event, timerType) {
     event.preventDefault();
+    clearInterval(timerId);
+    dispatch(actions.toggleTimer());
     dispatch(actions.setTimer({
       work: event.target.work.value * 60,
       shortBreak: event.target.shortBreak.value * 60,
