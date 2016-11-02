@@ -1,16 +1,6 @@
 import { RESET, TOGGLE_TIMER, TICK, SET_TIMER } from '../constants/TimerActionTypes';
 
-const initialState = {
-  startingTime: {
-    work: 1500,
-    shortBreak: 300,
-    longBreak: 900,
-  },
-  seconds: 1,
-  active: false,
-};
-
-const timer = (state = initialState, action) => {
+const timer = (state = [], action) => {
   switch (action.type) {
     case RESET:
       return {

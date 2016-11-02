@@ -1,0 +1,5 @@
+.settingsButton {
+  composes: button from '../../style/button.css';
+  flex-basis: calc(10vh + 10px);
+  padding: 1vh;
+}
