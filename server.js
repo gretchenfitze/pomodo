@@ -1,34 +1,47 @@
-import Express from 'express';
-import path from 'path';
+import express from 'express';
 import webpack from 'webpack';
+import path from 'path';
+import httpProxy from 'http-proxy';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import config from './webpack.config.babel';
 
-const app = new Express();
-const port = 3000;
-
-const compiler = webpack(config);
-app.use(webpackDevMiddleware(compiler, {
-  noInfo: true,
-  publicPath: config.output.publicPath,
-}));
-app.use(webpackHotMiddleware(compiler));
-
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+const proxy = httpProxy.createProxyServer({
+  changeOrigin: true,
 });
 
-app.listen(port, (error) => {
-  /* eslint-disable no-console */
-  if (error) {
-    console.error(error);
-  } else {
-    console.info(
-      '🌎 Listening on port %s. Open up http://localhost:%s/ in your browser.',
-      port,
-      port
-    );
-  }
-  /* eslint-enable no-console */
+const app = express();
+
+const isProduction = process.env.NODE_ENV === 'production';
+const port = isProduction ? process.env.PORT : 3000;
+const publicPath = path.resolve(__dirname, 'public');
+
+app.use(express.static(publicPath));
+
+if (!isProduction) {
+  const compiler = webpack(config);
+
+  app.use(webpackDevMiddleware(compiler, {
+    noInfo: true,
+    publicPath: config.output.publicPath,
+  }));
+  app.use(webpackHotMiddleware(compiler));
+
+  app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/index.html'));
+  });
+
+  app.all('/public/*', (req, res) => {
+    proxy.web(req, res, {
+      target: 'http://localhost:8080',
+    });
+  });
+}
+
+proxy.on('error', () => {
+  console.log('Could not connect to proxy, please try again...');
+});
+
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });
