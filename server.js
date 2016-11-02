@@ -27,16 +27,16 @@ if (!isProduction) {
   }));
   app.use(webpackHotMiddleware(compiler));
 
-  app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '/public/index.html'));
-  });
-
   app.all('/public/*', (req, res) => {
     proxy.web(req, res, {
       target: 'http://localhost:8080',
     });
   });
 }
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/index.html'));
+});
 
 proxy.on('error', () => {
   console.log('Could not connect to proxy, please try again...');
