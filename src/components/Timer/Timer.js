@@ -1,8 +1,10 @@
 import React, { PropTypes } from 'react';
+import style from './Timer.css';
 
 const Timer = ({ minutes, seconds }) => (
-  <div className="timer-clock">{minutes < 10 ? `0${minutes}` : minutes}:
-    {seconds < 10 ? `0${seconds}` : seconds}</div>
+  <div className={style.timer}>
+    {minutes < 10 ? `0${minutes}` : minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+  </div>
 );
 
 Timer.propTypes = {

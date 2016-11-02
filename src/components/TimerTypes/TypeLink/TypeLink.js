@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
+import style from '../../style/button.css';
 
-const TimerLink = ({ children, timerType }) => (
+const TypeLink = ({ children, timerType }) => (
   <Link
     to={timerType}
     style={{
@@ -13,15 +14,15 @@ const TimerLink = ({ children, timerType }) => (
       color: '#000',
       boxShadow: '0 0 25px #fff, 0 0 5px #fff',
     }}
-    className="timer-type timer-button"
+    className={style.button}
   >
     {children}
   </Link>
 );
 
-TimerLink.propTypes = {
+TypeLink.propTypes = {
   children: PropTypes.string.isRequired,
   timerType: PropTypes.string.isRequired,
 };
 
-export default TimerLink;
+export default TypeLink;
