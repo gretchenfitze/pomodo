@@ -1,9 +1,7 @@
-.button {
-  composes: glow from './glow.css';
+.app__button {
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center; 
   margin: 2vh 2vw;
   padding: 0;
   width: 100%;
@@ -12,12 +10,25 @@
   border-radius: 1vh;
   background-color: transparent;
   color: #fff;
+  text-align: center;
+  text-decoration: none;
   font-size: 4vh;
   font-family: 'Open Sans Condensed', sans-serif;
   line-height: 1;
   transition: all 0.5s;
 }
 
-.button:focus {
+.app__button:hover {
   outline: none;
+  box-shadow: 0 0 25px #fff, 0 0 5px #fff, inset 0 0 25px #fff, inset 0 0 5px #fff;
+}
+
+.app__button:focus {
+  outline: none;
+}
+
+.app__button_active {
+  background-color: #fff;
+  color: #000;
+  box-shadow: 0 0 25px #fff, 0 0 5px #fff;
 }

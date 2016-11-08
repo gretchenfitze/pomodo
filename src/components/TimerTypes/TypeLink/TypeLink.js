@@ -5,16 +5,8 @@ import style from '../../style/button.css';
 const TypeLink = ({ children, timerType }) => (
   <Link
     to={timerType}
-    style={{
-      color: '#fff',
-      textDecoration: 'none',
-    }}
-    activeStyle={{
-      backgroundColor: '#fff',
-      color: '#000',
-      boxShadow: '0 0 25px #fff, 0 0 5px #fff',
-    }}
-    className={style.button}
+    className={style.app__button}
+    activeClassName={style.app__button_active}
   >
     {children}
   </Link>

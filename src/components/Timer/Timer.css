@@ -1,4 +1,4 @@
-.timer {
+.app__timer {
   display: flex;
   justify-content: center;
   margin: calc((100vh - 28vh - 17vh) / 2) auto;

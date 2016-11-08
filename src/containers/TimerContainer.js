@@ -11,10 +11,6 @@ import notify from '../utilities/notify';
 
 let timerId;
 
-const toggleSettingsForm = () => {
-  document.querySelector('.settings-wrapper').classList.toggle('invisible');
-};
-
 class TimerContainer extends React.Component {
   constructor({ actions, params }) {
     super();
@@ -38,8 +34,8 @@ class TimerContainer extends React.Component {
   }
 
   render() {
-    const { seconds, active, timerType, onStartClick,
-      onSettingsClick, onFormInput, startingTime } = this.props;
+    const { seconds, active, timerType, onStartClick, onFormInput,
+      startingTime, settingsVisibility, actions } = this.props;
     return (
       <div>
         <TimerTypes />
@@ -47,11 +43,12 @@ class TimerContainer extends React.Component {
         <Settings
           onFormInput={event => onFormInput(event, timerType, startingTime)}
           startingTime={startingTime}
+          settingsVisibility={settingsVisibility}
         />
         <Controls
           active={active}
           onStartClick={event => onStartClick(event, active)}
-          onSettingsClick={() => onSettingsClick()}
+          onSettingsClick={() => actions.toggleSettings()}
         />
       </div>
     );
@@ -61,19 +58,19 @@ class TimerContainer extends React.Component {
 TimerContainer.propTypes = {
   seconds: PropTypes.number.isRequired,
   active: PropTypes.bool.isRequired,
+  settingsVisibility: PropTypes.bool.isRequired,
   timerType: PropTypes.string.isRequired,
   startingTime: PropTypes.object.isRequired,
   onStartClick: PropTypes.func.isRequired,
-  onSettingsClick: PropTypes.func.isRequired,
   onFormInput: PropTypes.func.isRequired,
   actions: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state, { params }) => {
-  const { seconds, active, startingTime } = state.timer;
+  const { seconds, active, startingTime, settingsVisibility } = state.timer;
   const { timerType } = params || 'work';
-  return { timerType, seconds, active, startingTime };
+  return { timerType, seconds, active, startingTime, settingsVisibility };
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -82,10 +79,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actions.toggleTimer());
     if (!active) timerId = setInterval(() => { dispatch(actions.timerTick()); }, 1000);
     else clearInterval(timerId);
-    event.target.classList.toggle('active');
-  },
-  onSettingsClick() {
-    toggleSettingsForm();
   },
   onFormInput(event, timerType, startingTime) {
     event.preventDefault();

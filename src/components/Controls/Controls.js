@@ -4,7 +4,7 @@ import SettingsButton from './SettingsButton/SettingsButton';
 import style from '../style/flex-wrapper.css';
 
 const Controls = ({ active, onStartClick, onSettingsClick }) => (
-  <div className={style.wrapper}>
+  <div className={`app__controls ${style.app__wrapper}`}>
     <StartButton active={active} onClick={event => onStartClick(event, active)} />
     <SettingsButton onClick={onSettingsClick} />
   </div>

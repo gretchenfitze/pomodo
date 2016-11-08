@@ -13,6 +13,7 @@ const configureStore = () => {
       },
       seconds: 1,
       active: false,
+      settingsVisibility: false,
     },
   };
 

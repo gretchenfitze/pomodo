@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
-import style from './StartButton.css';
+import style from '../../style/button.css';
 
 const StartButton = ({ onClick, active }) => (
   <button
-    className={`${style.startButton} ${active ? style.active : style.nonActive}`}
+    className={`app__controls_start ${style.app__button} ${active ? style.app__button_active : ' '}`}
     onClick={onClick}
   >
     {active ? 'Pause' : 'Start'}
