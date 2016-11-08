@@ -1,6 +1,8 @@
+import notification from './notification.mp3';
+
 const BREAK_OVER_TEXT = 'Break is over! Get back to work now.';
 const WORK_OVER_TEXT = 'Work time is over! Take a break.';
-const audio = new Audio('https://notificationsounds.com/message-tones/office-2-453/download/mp3');
+const audio = new Audio(notification);
 
 const notify = (timerType) => {
   const text = timerType === 'work' ? WORK_OVER_TEXT : BREAK_OVER_TEXT;
