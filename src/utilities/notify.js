@@ -11,12 +11,12 @@ const notify = (timerType) => {
     alert('This browser does not support system notifications');
   } else if (Notification.permission === 'granted') {
     audio.play();
-    const notification = new Notification(text);
+    const newNotification = new Notification(text);
   } else if (Notification.permission !== 'denied') {
     Notification.requestPermission().then((permission) => {
       if (permission === 'granted') {
         audio.play();
-        const notification = new Notification(text);
+        const newNotification = new Notification(text);
       }
     });
   }
