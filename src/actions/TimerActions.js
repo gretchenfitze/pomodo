@@ -1,20 +1,26 @@
 import { RESET, SET_TIMER, START, STOP, TICK, TOGGLE_SETTINGS } from '../constants/TimerActionTypes';
 
-export const resetTimer = timerType => ({
-  type: RESET,
-  timerType,
-});
-
-export const setTimer = (startingTime, timerType) => ([
-  {
-    type: SET_TIMER,
-    startingTime,
-  },
-  {
+export const resetTimer = timerType => (dispatch, getState) => {
+  clearInterval(getState().timer.active);
+  dispatch({
     type: RESET,
     timerType,
-  },
-]);
+  });
+};
+
+export const setTimer = (startingTime, timerType) => (dispatch, getState) => {
+  clearInterval(getState().timer.active);
+  dispatch([
+    {
+      type: SET_TIMER,
+      startingTime,
+    },
+    {
+      type: RESET,
+      timerType,
+    },
+  ]);
+};
 
 export const toggleTimer = active => (dispatch, getState) => {
   if (!active) {

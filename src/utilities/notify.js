@@ -8,7 +8,7 @@ const notify = (timerType) => {
   const text = timerType === 'work' ? WORK_OVER_TEXT : BREAK_OVER_TEXT;
 
   if (!('Notification' in window)) {
-    alert('This browser does not support system notifications');
+    console.log('This browser does not support system notifications');
   } else if (Notification.permission === 'granted') {
     audio.play();
     const newNotification = new Notification(text);

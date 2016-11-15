@@ -22,7 +22,11 @@ const SettingsInputField = ({ timerType, text, onFormInput, startingTime }) => (
 SettingsInputField.propTypes = {
   timerType: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
-  startingTime: PropTypes.object.isRequired,
+  startingTime: PropTypes.shape({
+    work: PropTypes.number.isRequired,
+    shortBreak: PropTypes.number.isRequired,
+    longBreak: PropTypes.number.isRequired,
+  }).isRequired,
   onFormInput: PropTypes.func.isRequired,
 };
 

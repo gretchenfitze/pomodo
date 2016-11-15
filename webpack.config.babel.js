@@ -20,7 +20,7 @@ export default {
   ],
   module: {
     loaders: [{
-      test: /\.js$/,
+      test: [/\.js$/, /\.jsx$/],
       loaders: ['babel'],
       exclude: path.join(__dirname, 'node_modules'),
     },
@@ -36,5 +36,8 @@ export default {
       test: /\.mp3$/,
       loader: 'file',
     }],
+  },
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
   },
 };

@@ -10,7 +10,6 @@ const TimerButton = ({ onClick }) => (
 );
 
 TimerButton.propTypes = {
-  children: PropTypes.any,
   onClick: PropTypes.func,
 };
 

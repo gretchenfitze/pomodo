@@ -54,11 +54,17 @@ class TimerContainer extends React.Component {
 }
 
 TimerContainer.propTypes = {
-  params: PropTypes.object.isRequired,
+  params: PropTypes.shape({
+    timerType: PropTypes.string.isRequired,
+  }).isRequired,
   seconds: PropTypes.number.isRequired,
   active: PropTypes.number,
   timerType: PropTypes.string.isRequired,
-  startingTime: PropTypes.object.isRequired,
+  startingTime: PropTypes.shape({
+    work: PropTypes.number.isRequired,
+    shortBreak: PropTypes.number.isRequired,
+    longBreak: PropTypes.number.isRequired,
+  }).isRequired,
   settingsVisibility: PropTypes.bool,
   onStartPauseClick: PropTypes.func.isRequired,
   onFormInput: PropTypes.func.isRequired,
