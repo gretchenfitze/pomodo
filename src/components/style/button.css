@@ -15,7 +15,7 @@
   font-size: 4vh;
   font-family: 'Open Sans Condensed', sans-serif;
   line-height: 1;
-  transition: all 0.5s;
+  transition: box-shadow 0.5s, background 0.5s;
 }
 
 .app__button:hover {

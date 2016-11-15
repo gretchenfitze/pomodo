@@ -16,10 +16,6 @@
       width: auto;
     }
 
-    &::-webkit-inner-spin-button {
-      width: 1vw;
-    }
-
     &:hover {
       box-shadow: none;
     }
