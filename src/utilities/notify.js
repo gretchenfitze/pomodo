@@ -1,3 +1,4 @@
+/* eslint-disable */
 import notification from './notification.mp3';
 
 const BREAK_OVER_TEXT = 'Break is over! Get back to work now.';
