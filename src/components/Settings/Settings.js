@@ -37,7 +37,7 @@ const Settings = ({ onFormInput, startingTime, settingsVisibility }) => (
 Settings.propTypes = {
   onFormInput: PropTypes.func.isRequired,
   startingTime: PropTypes.object.isRequired,
-  settingsVisibility: PropTypes.bool.isRequired,
+  settingsVisibility: PropTypes.bool,
 };
 
 export default Settings;

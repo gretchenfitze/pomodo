@@ -11,7 +11,7 @@ const StartButton = ({ onClick, active }) => (
 );
 
 StartButton.propTypes = {
-  active: PropTypes.bool.isRequired,
+  active: PropTypes.number,
   onClick: PropTypes.func.isRequired,
 };
 

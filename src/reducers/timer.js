@@ -1,4 +1,4 @@
-import { RESET, SET_TIMER, TICK, TOGGLE_SETTINGS, TOGGLE_TIMER } from '../constants/TimerActionTypes';
+import { RESET, SET_TIMER, START, STOP, TICK, TOGGLE_SETTINGS } from '../constants/TimerActionTypes';
 
 const timer = (state = [], action) => {
   switch (action.type) {
@@ -6,7 +6,7 @@ const timer = (state = [], action) => {
       return {
         ...state,
         seconds: state.startingTime[action.timerType],
-        active: false,
+        active: null,
       };
     case SET_TIMER:
       return {
@@ -17,6 +17,16 @@ const timer = (state = [], action) => {
           longBreak: action.startingTime.longBreak,
         },
       };
+    case START:
+      return {
+        ...state,
+        active: action.active,
+      };
+    case STOP:
+      return {
+        ...state,
+        active: null,
+      };
     case TICK:
       return {
         ...state,
@@ -26,11 +36,6 @@ const timer = (state = [], action) => {
       return {
         ...state,
         settingsVisibility: !state.settingsVisibility,
-      };
-    case TOGGLE_TIMER:
-      return {
-        ...state,
-        active: !state.active,
       };
     default:
       return state;

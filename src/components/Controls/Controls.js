@@ -11,7 +11,7 @@ const Controls = ({ active, onStartClick, onSettingsClick }) => (
 );
 
 Controls.propTypes = {
-  active: PropTypes.bool.isRequired,
+  active: PropTypes.number,
   onStartClick: PropTypes.func.isRequired,
   onSettingsClick: PropTypes.func.isRequired,
 };
