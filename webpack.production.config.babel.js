@@ -25,8 +25,8 @@ export default {
   ],
   module: {
     loaders: [{
-      test: [/\.js$/, /\.jsx$/],
-      loaders: ['babel'],
+      test: /\.(js|jsx)$/,
+      loader: 'babel',
       exclude: /node_modules/,
     },
     {

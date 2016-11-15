@@ -20,8 +20,8 @@ export default {
   ],
   module: {
     loaders: [{
-      test: [/\.js$/, /\.jsx$/],
-      loaders: ['babel'],
+      test: /\.(js|jsx)$/,
+      loader: 'babel',
       exclude: path.join(__dirname, 'node_modules'),
     },
     {
