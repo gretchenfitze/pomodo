@@ -1,20 +1,22 @@
 .app__settings {
   composes: app__wrapper from '../style/flex-wrapper.css';
   position: absolute;
-  top: 50%;
-  right: 0;
+  bottom: 16vh;
+  right: calc(2vw + 5vh);
+  padding-left: 3vw;
   display: flex;
   flex-direction: column;
-  transform: translate(0, -50%);
+  box-shadow: 0 0 25px #fff, 0 0 5px #fff, inset 0 0 25px #fff, inset 0 0 5px #fff;
+  border-radius: 1vh;
+  width: 30vh;
 
   @media (orientation: portrait) {
-    bottom: calc(14vh + 10px);
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     flex-direction: row;
     align-items: flex-end;
     justify-content: space-around;
-    width: 100%;
-    transform: none;
+    width: 92vw;
   }
 }
 

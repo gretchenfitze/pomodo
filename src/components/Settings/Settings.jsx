@@ -10,14 +10,12 @@ const Settings = ({ onFormInput, startingTime, settingsVisibility }) => (
       startingTime={startingTime}
       onFormInput={onFormInput}
     />
-    <br />
     <SettingsInputField
       timerType="shortBreak"
       text="Short break"
       startingTime={startingTime}
       onFormInput={onFormInput}
     />
-    <br />
     <SettingsInputField
       timerType="longBreak"
       text="Long break"
