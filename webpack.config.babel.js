@@ -20,8 +20,8 @@ export default {
   ],
   module: {
     loaders: [{
-      test: /\.js$/,
-      loaders: ['babel'],
+      test: /\.(js|jsx)$/,
+      loader: 'babel',
       exclude: path.join(__dirname, 'node_modules'),
     },
     {
@@ -30,7 +30,14 @@ export default {
     },
     {
       test: /\.css$/,
-      loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+      loader: 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss',
+    },
+    {
+      test: /\.mp3$/,
+      loader: 'file',
     }],
+  },
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
   },
 };

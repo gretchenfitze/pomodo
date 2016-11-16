@@ -2,8 +2,10 @@ import React, { PropTypes } from 'react';
 import style from './SettingsInputField.css';
 
 const SettingsInputField = ({ timerType, text, onFormInput, startingTime }) => (
-  <label htmlFor={timerType}>
-    {text}
+  <div className={style.app__settings_item}>
+    <label htmlFor={timerType} className={style.app__settings_label}>
+      {text}
+    </label>
     <input
       type="number"
       min="1"
@@ -12,15 +14,19 @@ const SettingsInputField = ({ timerType, text, onFormInput, startingTime }) => (
       defaultValue={startingTime[timerType] / 60}
       id={timerType}
       onChange={onFormInput}
-      className={style.inputField}
+      className={style.app__settings_input}
     />
-  </label>
+  </div>
 );
 
 SettingsInputField.propTypes = {
   timerType: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
-  startingTime: PropTypes.object.isRequired,
+  startingTime: PropTypes.shape({
+    work: PropTypes.number.isRequired,
+    shortBreak: PropTypes.number.isRequired,
+    longBreak: PropTypes.number.isRequired,
+  }).isRequired,
   onFormInput: PropTypes.func.isRequired,
 };
 
