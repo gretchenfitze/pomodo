@@ -45,7 +45,7 @@ class TimerContainer extends React.Component {
         />
         <Controls
           active={active}
-          onStartClick={() => onStartPauseClick(active)}
+          onStartClick={() => onStartPauseClick(active, 1000)}
           onSettingsClick={() => onSettingsClick()}
         />
       </div>

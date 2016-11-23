@@ -3,16 +3,14 @@ import { RESET, SET_TIMER, START, STOP, TICK, TOGGLE_SETTINGS } from '../../cons
 import reducer from './timer';
 
 describe('Timer reducer', () => {
-  function stateBefore() {
-    return {
-      startingTime: {
-        work: 1500,
-        shortBreak: 300,
-        longBreak: 900,
-      },
-      seconds: 100,
-    };
-  }
+  const initialState = {
+    startingTime: {
+      work: 1500,
+      shortBreak: 300,
+      longBreak: 900,
+    },
+    seconds: 100,
+  };
 
   it('handles timer reset', () => {
     const action = {
@@ -28,7 +26,7 @@ describe('Timer reducer', () => {
       seconds: 1500,
       active: null,
     };
-    const actual = reducer(stateBefore(), action);
+    const actual = reducer(initialState, action);
     expect(actual).toEqual(expected);
   });
 
@@ -49,7 +47,7 @@ describe('Timer reducer', () => {
       },
       seconds: 100,
     };
-    const actual = reducer(stateBefore(), action);
+    const actual = reducer(initialState, action);
     expect(actual).toEqual(expected);
   });
 
@@ -67,7 +65,7 @@ describe('Timer reducer', () => {
       seconds: 100,
       active: 420,
     };
-    const actual = reducer(stateBefore(), action);
+    const actual = reducer(initialState, action);
     expect(actual).toEqual(expected);
   });
 
@@ -84,7 +82,7 @@ describe('Timer reducer', () => {
       seconds: 100,
       active: null,
     };
-    const actual = reducer(stateBefore(), action);
+    const actual = reducer(initialState, action);
     expect(actual).toEqual(expected);
   });
 
@@ -100,7 +98,7 @@ describe('Timer reducer', () => {
       },
       seconds: 99,
     };
-    const actual = reducer(stateBefore(), action);
+    const actual = reducer(initialState, action);
     expect(actual).toEqual(expected);
   });
 
@@ -117,7 +115,7 @@ describe('Timer reducer', () => {
       seconds: 100,
       settingsVisibility: true,
     };
-    const actual = reducer(stateBefore(), action);
+    const actual = reducer(initialState, action);
     expect(actual).toEqual(expected);
   });
 });

@@ -22,13 +22,13 @@ export const setTimer = (startingTime, timerType) => (dispatch, getState) => {
   ]);
 };
 
-export const toggleTimer = active => (dispatch, getState) => {
+export const toggleTimer = (active, interval) => (dispatch, getState) => {
   if (!active) {
     const timerId = setInterval(() => {
       dispatch({
         type: TICK,
       });
-    }, 1000);
+    }, interval);
 
     dispatch({
       type: START,

@@ -2,10 +2,10 @@ import expect from 'expect';
 import configureStore from './configureStore';
 import { RESET, SET_TIMER, START, STOP, TICK, TOGGLE_SETTINGS } from '../constants/TimerActionTypes';
 
-describe('store', () => {
+describe('Store', () => {
   const store = configureStore();
 
-  it('should initialize', () => {
+  it('initializes', () => {
     const actual = store.getState();
     const expected = {
       timer: {
@@ -20,7 +20,7 @@ describe('store', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('should work with the series of actions', () => {
+  it('works with the series of actions', () => {
     const actions = [
       {
         type: TOGGLE_SETTINGS,
