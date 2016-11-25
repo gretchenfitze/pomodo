@@ -7,7 +7,7 @@ module.exports = function(config) {
     frameworks: ['mocha', 'expect'],
     files: [
       'node_modules/babel-polyfill/dist/polyfill.js',
-      'webpack.test.js',
+      'test/index.js',
     ],
     plugins: [
       'karma-chrome-launcher',
@@ -20,7 +20,7 @@ module.exports = function(config) {
       'karma-webpack',
     ],
     preprocessors: {
-      'webpack.test.js': ['webpack', 'sourcemap'],
+      'test/index.js': ['webpack', 'sourcemap'],
     },
     reporters: ['mocha', 'coverage'],
     webpack: {
@@ -30,6 +30,9 @@ module.exports = function(config) {
           test: /\.(js|jsx)$/,
           loader: 'babel',
           exclude: /node_modules/,
+          query: {
+            plugins: [['istanbul', { exclude: 'test/' }]],
+          },
         },
         {
           test: /\.svg$/,

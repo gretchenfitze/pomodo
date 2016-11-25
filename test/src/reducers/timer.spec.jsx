@@ -1,6 +1,6 @@
 import expect from 'expect';
-import { RESET, SET_TIMER, START, STOP, TICK, TOGGLE_SETTINGS } from '../../constants/TimerActionTypes';
-import reducer from './timer';
+import { RESET, SET_TIMER, START, STOP, TICK, TOGGLE_SETTINGS } from '../../../src/constants/TimerActionTypes';
+import reducer from '../../../src/reducers/timer/timer';
 
 describe('Timer reducer', () => {
   const initialState = {

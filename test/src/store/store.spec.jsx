@@ -1,6 +1,6 @@
 import expect from 'expect';
-import configureStore from './configureStore';
-import { RESET, SET_TIMER, START, STOP, TICK, TOGGLE_SETTINGS } from '../constants/TimerActionTypes';
+import configureStore from '../../../src/store/configureStore';
+import { RESET, SET_TIMER, START, STOP, TICK, TOGGLE_SETTINGS } from '../../../src/constants/TimerActionTypes';
 
 describe('Store', () => {
   const store = configureStore();

@@ -2,8 +2,8 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import multi from 'redux-multi';
 import expect from 'expect';
-import { resetTimer, setTimer, toggleTimer, toggleSettings } from './TimerActions';
-import { RESET, SET_TIMER, START, STOP, TICK, TOGGLE_SETTINGS } from '../constants/TimerActionTypes';
+import { resetTimer, setTimer, toggleTimer, toggleSettings } from '../../../src/actions/TimerActions';
+import { RESET, SET_TIMER, START, STOP, TICK, TOGGLE_SETTINGS } from '../../../src/constants/TimerActionTypes';
 
 const middlewares = [thunk, multi];
 const mockStore = configureMockStore(middlewares);
