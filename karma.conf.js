@@ -1,8 +1,9 @@
-var webpack = require('webpack');
+/* eslint-disable */
+const webpack = require('webpack');
 
 module.exports = function(config) {
   config.set({
-    browsers: ['Chrome', 'PhantomJS'],
+    browsers: ['Chrome'],
     singleRun: true,
     frameworks: ['mocha', 'expect'],
     files: [

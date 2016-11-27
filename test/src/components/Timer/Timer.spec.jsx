@@ -2,7 +2,7 @@ import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import expect from 'expect';
 import expectJSX from 'expect-jsx';
-import Timer from '../../../src/components/Timer/Timer.jsx';
+import Timer from '../../../../src/components/Timer/Timer';
 
 expect.extend(expectJSX);
 

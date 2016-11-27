@@ -5,7 +5,7 @@ import style from '../style/flex-wrapper.css';
 
 const Controls = ({ active, onStartClick, onSettingsClick }) => (
   <div className={`app__controls ${style.app__wrapper}`}>
-    <StartButton active={active} onClick={event => onStartClick(event, active)} />
+    <StartButton active={active} onClick={onStartClick} />
     <SettingsButton onClick={onSettingsClick} />
   </div>
 );
