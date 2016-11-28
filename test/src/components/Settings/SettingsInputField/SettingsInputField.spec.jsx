@@ -11,7 +11,11 @@ describe('SettingsInputField', () => {
     renderer.render(<SettingsInputField
       timerType="work"
       text="Work"
-      startingTime={999}
+      startingTime={{
+        work: 1500,
+        shortBreak: 300,
+        longBreak: 900,
+      }}
       onFormInput={() => {}}
     />);
     actual = renderer.getRenderOutput();

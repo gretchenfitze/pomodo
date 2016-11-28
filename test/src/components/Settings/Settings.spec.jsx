@@ -10,7 +10,11 @@ describe('Settings', () => {
     const renderer = ReactTestUtils.createRenderer();
     renderer.render(<Settings
       onFormInput={() => {}}
-      startingTime={999}
+      startingTime={{
+        work: 1500,
+        shortBreak: 300,
+        longBreak: 900,
+      }}
     />);
     actual = renderer.getRenderOutput();
   });
