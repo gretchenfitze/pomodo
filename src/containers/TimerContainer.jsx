@@ -8,16 +8,16 @@ import Settings from '../components/Settings/Settings';
 import Controls from '../components/Controls/Controls';
 import notify from '../utilities/notify';
 
-class TimerContainer extends React.Component {
-  constructor({ params, onTimerReset }) {
+export class TimerContainer extends React.Component {
+  constructor({ timerType, onTimerReset }) {
     super();
-    onTimerReset(params.timerType);
+    onTimerReset(timerType);
     Notification.requestPermission();
   }
 
-  componentWillReceiveProps({ params, onTimerReset }) {
-    if (this.props.params.timerType !== params.timerType) {
-      onTimerReset(params.timerType);
+  componentWillReceiveProps({ timerType, onTimerReset }) {
+    if (this.props.timerType !== timerType) {
+      onTimerReset(timerType);
     }
   }
 
@@ -45,8 +45,8 @@ class TimerContainer extends React.Component {
         />
         <Controls
           active={active}
-          onStartClick={() => onStartPauseClick(active)}
-          onSettingsClick={() => onSettingsClick()}
+          onStartClick={() => onStartPauseClick(active, 1000)}
+          onSettingsClick={onSettingsClick}
         />
       </div>
     );
@@ -54,9 +54,6 @@ class TimerContainer extends React.Component {
 }
 
 TimerContainer.propTypes = {
-  params: PropTypes.shape({
-    timerType: PropTypes.string.isRequired,
-  }).isRequired,
   seconds: PropTypes.number.isRequired,
   active: PropTypes.number,
   timerType: PropTypes.string.isRequired,
@@ -72,9 +69,9 @@ TimerContainer.propTypes = {
   onTimerReset: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state, { params }) => {
+export const mapStateToProps = (state, { params }) => {
   const { seconds, active, startingTime, settingsVisibility } = state.timer;
-  const { timerType } = params || 'work';
+  const { timerType } = params;
   return { seconds, active, timerType, startingTime, settingsVisibility };
 };
 

@@ -1,4 +1,4 @@
-import { RESET, SET_TIMER, START, STOP, TICK, TOGGLE_SETTINGS } from '../constants/TimerActionTypes';
+import { RESET, SET_TIMER, START, STOP, TICK, TOGGLE_SETTINGS } from '../../constants/TimerActionTypes';
 
 const timer = (state = [], action) => {
   switch (action.type) {
