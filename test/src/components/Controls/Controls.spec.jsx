@@ -5,10 +5,12 @@ import Controls from '../../../../src/components/Controls/Controls';
 
 describe('Controls', () => {
   let actual;
+  const spyClick = expect.createSpy();
+  const spySettings = expect.createSpy();
 
   beforeEach(() => {
     const renderer = ReactTestUtils.createRenderer();
-    renderer.render(<Controls onStartClick={() => {}} onSettingsClick={() => {}} />);
+    renderer.render(<Controls onStartClick={spyClick} onSettingsClick={spySettings} />);
     actual = renderer.getRenderOutput();
   });
 
@@ -17,10 +19,10 @@ describe('Controls', () => {
   });
 
   it('handles start click', () => {
-    expect(actual.props.children[0].props.onClick).toExist();
+    expect(spyClick.call.length).toEqual(1);
   });
 
   it('handles settings click', () => {
-    expect(actual.props.children[1].props.onClick).toExist();
+    expect(spySettings.call.length).toEqual(1);
   });
 });

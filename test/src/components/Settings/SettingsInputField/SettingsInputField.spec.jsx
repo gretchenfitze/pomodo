@@ -5,6 +5,7 @@ import SettingsInputField from '../../../../../src/components/Settings/SettingsI
 
 describe('SettingsInputField', () => {
   let actual;
+  const spy = expect.createSpy();
 
   beforeEach(() => {
     const renderer = ReactTestUtils.createRenderer();
@@ -16,7 +17,7 @@ describe('SettingsInputField', () => {
         shortBreak: 300,
         longBreak: 900,
       }}
-      onFormInput={() => {}}
+      onFormInput={spy}
     />);
     actual = renderer.getRenderOutput();
   });
@@ -31,7 +32,7 @@ describe('SettingsInputField', () => {
   });
 
   it('handles input', () => {
-    expect(actual.props.children[1].props.onChange).toExist();
+    expect(spy.call.length).toEqual(1);
   });
 
   it('validates user input', () => {

@@ -4,9 +4,11 @@ import expect from 'expect';
 import StartButton from '../../../../../src/components/Controls/StartButton/StartButton';
 
 describe('StartButton', () => {
+  const spy = expect.createSpy();
+
   function renderStartButton(active = null) {
     const renderer = ReactTestUtils.createRenderer();
-    renderer.render(<StartButton onClick={() => {}} active={active} />);
+    renderer.render(<StartButton onClick={spy} active={active} />);
     return renderer.getRenderOutput();
   }
 
@@ -15,7 +17,7 @@ describe('StartButton', () => {
   });
 
   it('handles click', () => {
-    expect(renderStartButton().props.onClick).toExist();
+    expect(spy.call.length).toEqual(1);
   });
 
   it('changes text to "Start" if not active', () => {

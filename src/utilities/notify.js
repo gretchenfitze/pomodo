@@ -18,9 +18,9 @@ const notify = (timerType) => {
         audio.play();
         return new Notification(text);
       }
-      throw new Error('Notifications permission denied');
+      return false;
     });
   }
-  throw new Error('Notifications permission denied');
+  return false;
 };
 export default notify;

@@ -5,11 +5,12 @@ import Settings from '../../../../src/components/Settings/Settings';
 
 describe('Settings', () => {
   let actual;
+  const spy = expect.createSpy();
 
   beforeEach(() => {
     const renderer = ReactTestUtils.createRenderer();
     renderer.render(<Settings
-      onFormInput={() => {}}
+      onFormInput={spy}
       startingTime={{
         work: 1500,
         shortBreak: 300,
@@ -24,12 +25,10 @@ describe('Settings', () => {
   });
 
   it('contains 3 input fields', () => {
-    expect(actual.props.children.length).toEqual(3);
+    expect(React.Children.count(actual.props.children)).toBe(3);
   });
 
   it('handles form input', () => {
-    [].forEach.call(actual.props.children, (child) => {
-      expect(child.props.onFormInput).toExist();
-    });
+    expect(spy.call.length).toEqual(1);
   });
 });

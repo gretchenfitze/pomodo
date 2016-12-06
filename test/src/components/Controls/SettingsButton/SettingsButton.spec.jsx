@@ -9,10 +9,11 @@ expect.extend(expectJSX);
 
 describe('SettingsButton', () => {
   let actual;
+  const spy = expect.createSpy();
 
   beforeEach(() => {
     const renderer = ReactTestUtils.createRenderer();
-    renderer.render(<SettingsButton onClick={() => {}} />);
+    renderer.render(<SettingsButton onClick={spy} />);
     actual = renderer.getRenderOutput();
   });
 
@@ -21,7 +22,7 @@ describe('SettingsButton', () => {
   });
 
   it('handles click', () => {
-    expect(actual.props.onClick).toExist();
+    expect(spy.call.length).toEqual(1);
   });
 
   it('contains settings icon', () => {
