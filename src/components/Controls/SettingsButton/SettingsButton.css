@@ -1,5 +1,7 @@
 .app__controls_settings {
   composes: app__button from '../../style/button.css';
-  flex-basis: calc(10vh + 10px);
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 10vh;
   padding: 1vh;
 }

@@ -3,5 +3,6 @@
     "autoprefixer": {},
     "postcss-normalize": {},
     "postcss-nested": {},
+    "postcss-simple-vars": {},
   }
 }

@@ -13,6 +13,7 @@ describe('TimerContainer', () => {
   const spyStart = expect.createSpy();
   const spyInput = expect.createSpy();
   const spySettings = expect.createSpy();
+  const spyColor = expect.createSpy();
   const spyReset = expect.createSpy();
 
   const props = {
@@ -26,6 +27,7 @@ describe('TimerContainer', () => {
     onStartPauseClick: spyStart,
     onFormInput: spyInput,
     onSettingsClick: spySettings,
+    onColorClick: spyColor,
     onTimerReset: spyReset,
   };
 
@@ -44,6 +46,10 @@ describe('TimerContainer', () => {
 
   it('handles settings click', () => {
     expect(spySettings.call.length).toEqual(1);
+  });
+
+  it('handles color change click', () => {
+    expect(spyColor.call.length).toEqual(1);
   });
 
   it('handles reset', () => {
@@ -70,6 +76,14 @@ describe('TimerContainer', () => {
     expect(spyReset.call.length).toEqual(1);
   });
 
+  it('changes color theme', () => {
+    container.componentDidUpdate({
+      ...props,
+      colorTheme: true,
+    });
+    expect(spyColor.call.length).toEqual(1);
+  });
+
   it('maps state to props', () => {
     expect(mapStateToProps({ timer: {
       seconds: 999,
@@ -82,6 +96,7 @@ describe('TimerContainer', () => {
       seconds: 999,
       active: undefined,
       settingsVisibility: undefined,
+      colorTheme: undefined,
       timerType: 'work',
       startingTime: {
         work: 1500,

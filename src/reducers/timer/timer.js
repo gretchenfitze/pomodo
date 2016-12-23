@@ -1,4 +1,4 @@
-import { RESET, SET_TIMER, START, STOP, TICK, TOGGLE_SETTINGS } from '../../constants/TimerActionTypes';
+import { CHANGE_THEME, RESET, SET_TIMER, START, STOP, TICK, TOGGLE_SETTINGS } from '../../constants/TimerActionTypes';
 
 const timer = (state = [], action) => {
   switch (action.type) {
@@ -36,6 +36,11 @@ const timer = (state = [], action) => {
       return {
         ...state,
         settingsVisibility: !state.settingsVisibility,
+      };
+    case CHANGE_THEME:
+      return {
+        ...state,
+        colorTheme: !state.colorTheme,
       };
     default:
       return state;

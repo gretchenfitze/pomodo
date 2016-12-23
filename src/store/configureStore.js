@@ -30,10 +30,12 @@ const configureStore = () => {
   );
 
   store.subscribe(throttle(() => {
+    const state = store.getState().timer;
     saveState({
       timer: {
-        startingTime: store.getState().timer.startingTime,
+        startingTime: state.startingTime,
         seconds: 1,
+        colorTheme: state.colorTheme,
       },
     });
   }, 1000));

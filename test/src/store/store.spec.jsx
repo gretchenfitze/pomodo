@@ -1,6 +1,6 @@
 import expect from 'expect';
 import configureStore from '../../../src/store/configureStore';
-import { RESET, SET_TIMER, START, STOP, TICK, TOGGLE_SETTINGS } from '../../../src/constants/TimerActionTypes';
+import { CHANGE_THEME, RESET, SET_TIMER, START, STOP, TICK, TOGGLE_SETTINGS } from '../../../src/constants/TimerActionTypes';
 
 describe('Store', () => {
   const store = configureStore();
@@ -50,6 +50,9 @@ describe('Store', () => {
       {
         type: STOP,
       },
+      {
+        type: CHANGE_THEME,
+      },
     ];
 
     actions.forEach(action => store.dispatch(action));
@@ -63,6 +66,7 @@ describe('Store', () => {
         },
         seconds: 148,
         settingsVisibility: true,
+        colorTheme: true,
         active: null,
       },
     };

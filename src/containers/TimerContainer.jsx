@@ -7,6 +7,8 @@ import Timer from '../components/Timer/Timer';
 import Settings from '../components/Settings/Settings';
 import Controls from '../components/Controls/Controls';
 import notify from '../utilities/notify';
+import style from './TimerContainer.css';
+import colors from '../components/style/colors.css';
 
 export class TimerContainer extends React.Component {
   constructor({ timerType, onTimerReset }) {
@@ -30,10 +32,10 @@ export class TimerContainer extends React.Component {
 
   render() {
     const { seconds, active, timerType, startingTime, settingsVisibility,
-      onStartPauseClick, onFormInput, onSettingsClick } = this.props;
+      onStartPauseClick, onColorClick, onFormInput, onSettingsClick, colorTheme } = this.props;
     return (
-      <div>
-        <TimerTypes />
+      <div className={`${style.app} ${colorTheme ? 'white' : 'black'}`}>
+        <TimerTypes colorTheme={colorTheme} />
         <Timer minutes={Math.floor(seconds / 60)} seconds={seconds % 60} />
         <Settings
           onFormInput={event => onFormInput({
@@ -45,8 +47,10 @@ export class TimerContainer extends React.Component {
         />
         <Controls
           active={active}
+          onColorClick={onColorClick}
           onStartClick={() => onStartPauseClick(active, 1000)}
           onSettingsClick={onSettingsClick}
+          colorTheme={colorTheme}
         />
       </div>
     );
@@ -63,16 +67,18 @@ TimerContainer.propTypes = {
     longBreak: PropTypes.number.isRequired,
   }).isRequired,
   settingsVisibility: PropTypes.bool,
+  onColorClick: PropTypes.func.isRequired,
   onStartPauseClick: PropTypes.func.isRequired,
   onFormInput: PropTypes.func.isRequired,
   onSettingsClick: PropTypes.func.isRequired,
   onTimerReset: PropTypes.func.isRequired,
+  colorTheme: PropTypes.bool,
 };
 
 export const mapStateToProps = (state, { params }) => {
-  const { seconds, active, startingTime, settingsVisibility } = state.timer;
+  const { seconds, active, startingTime, settingsVisibility, colorTheme } = state.timer;
   const { timerType } = params;
-  return { seconds, active, timerType, startingTime, settingsVisibility };
+  return { seconds, active, timerType, startingTime, settingsVisibility, colorTheme };
 };
 
 export default withRouter(connect(mapStateToProps, {
@@ -80,4 +86,5 @@ export default withRouter(connect(mapStateToProps, {
   onFormInput: actions.setTimer,
   onSettingsClick: actions.toggleSettings,
   onTimerReset: actions.resetTimer,
+  onColorClick: actions.changeTheme,
 })(TimerContainer));

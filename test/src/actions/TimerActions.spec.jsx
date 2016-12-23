@@ -2,8 +2,8 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import multi from 'redux-multi';
 import expect from 'expect';
-import { resetTimer, setTimer, toggleTimer, toggleSettings } from '../../../src/actions/TimerActions';
-import { RESET, SET_TIMER, START, STOP, TICK, TOGGLE_SETTINGS } from '../../../src/constants/TimerActionTypes';
+import { changeTheme, resetTimer, setTimer, toggleTimer, toggleSettings } from '../../../src/actions/TimerActions';
+import { CHANGE_THEME, RESET, SET_TIMER, START, STOP, TICK, TOGGLE_SETTINGS } from '../../../src/constants/TimerActionTypes';
 
 const middlewares = [thunk, multi];
 const mockStore = configureMockStore(middlewares);
@@ -73,6 +73,15 @@ describe('Timer actions', () => {
     }];
     const store = mockStore(initialState);
     store.dispatch(toggleSettings());
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('creates action to change color theme', () => {
+    const expectedActions = [{
+      type: CHANGE_THEME,
+    }];
+    const store = mockStore(initialState);
+    store.dispatch(changeTheme());
     expect(store.getActions()).toEqual(expectedActions);
   });
 });

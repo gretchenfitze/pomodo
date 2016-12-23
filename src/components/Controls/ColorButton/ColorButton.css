@@ -1,0 +1,11 @@
+$primary: var(--primary);
+$secondary: var(--secondary);
+
+.app__controls_color {
+  composes: app__button from '../../style/button.css';
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 10vh;
+  padding: 1vh;
+  background: radial-gradient(circle, $secondary, $primary 60%);
+}

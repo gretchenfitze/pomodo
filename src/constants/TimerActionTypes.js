@@ -1,3 +1,4 @@
+export const CHANGE_THEME = 'CHANGE_THEME';
 export const RESET = 'RESET';
 export const SET_TIMER = 'SET_TIMER';
 export const START = 'START';

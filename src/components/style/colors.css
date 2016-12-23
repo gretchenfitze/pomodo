@@ -1,0 +1,11 @@
+:global {
+  .white {
+    --primary: #fff;
+    --secondary: #000;
+  }
+
+  .black {
+    --primary: #000;
+    --secondary: #fff;
+  }
+}

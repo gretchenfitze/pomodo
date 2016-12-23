@@ -1,5 +1,5 @@
 import expect from 'expect';
-import { RESET, SET_TIMER, START, STOP, TICK, TOGGLE_SETTINGS } from '../../../src/constants/TimerActionTypes';
+import { CHANGE_THEME, RESET, SET_TIMER, START, STOP, TICK, TOGGLE_SETTINGS } from '../../../src/constants/TimerActionTypes';
 import reducer from '../../../src/reducers/timer/timer';
 
 describe('Timer reducer', () => {
@@ -114,6 +114,23 @@ describe('Timer reducer', () => {
       },
       seconds: 100,
       settingsVisibility: true,
+    };
+    const actual = reducer(initialState, action);
+    expect(actual).toEqual(expected);
+  });
+
+  it('handles theme changing', () => {
+    const action = {
+      type: CHANGE_THEME,
+    };
+    const expected = {
+      startingTime: {
+        work: 1500,
+        shortBreak: 300,
+        longBreak: 900,
+      },
+      seconds: 100,
+      colorTheme: true,
     };
     const actual = reducer(initialState, action);
     expect(actual).toEqual(expected);

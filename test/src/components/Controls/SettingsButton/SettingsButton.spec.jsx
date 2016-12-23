@@ -27,9 +27,13 @@ describe('SettingsButton', () => {
 
   it('contains settings icon', () => {
     let icon = ReactTestUtils.createRenderer();
-    icon.render(<SettingsIcon height="8vh" width="8vh" />);
+    icon.render(<SettingsIcon height="8vh" width="8vh" fill="var(--secondary)" />);
     icon = icon.getRenderOutput();
-    expect(actual.props.children).toEqualJSX(<SettingsIcon height="8vh" width="8vh" />);
+    expect(actual.props.children).toEqualJSX(<SettingsIcon
+      height="8vh"
+      width="8vh"
+      fill="var(--secondary)"
+    />);
   });
 
   describe('SettingsIcon', () => {

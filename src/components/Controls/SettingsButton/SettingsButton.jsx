@@ -4,7 +4,7 @@ import SettingsIcon from './SettingsButton.svg';
 
 const SettingsButton = ({ onClick }) => (
   <button className={style.app__controls_settings} onClick={onClick}>
-    <SettingsIcon height="8vh" width="8vh" />
+    <SettingsIcon height="8vh" width="8vh" fill="var(--secondary)" />
   </button>
 );
 

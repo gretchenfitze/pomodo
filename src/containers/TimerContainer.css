@@ -3,9 +3,9 @@
   padding: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #000;
-  color: #fff;
   font-size: 4vh;
   font-family: 'Open Sans Condensed', sans-serif;
   line-height: 1;
+  background: var(--primary);
+  color: var(--secondary);
 }

@@ -7,10 +7,15 @@ describe('Controls', () => {
   let actual;
   const spyClick = expect.createSpy();
   const spySettings = expect.createSpy();
+  const spyColor = expect.createSpy();
 
   beforeEach(() => {
     const renderer = ReactTestUtils.createRenderer();
-    renderer.render(<Controls onStartClick={spyClick} onSettingsClick={spySettings} />);
+    renderer.render(<Controls
+      onStartClick={spyClick}
+      onSettingsClick={spySettings}
+      onColorClick={spyColor}
+    />);
     actual = renderer.getRenderOutput();
   });
 
@@ -24,5 +29,9 @@ describe('Controls', () => {
 
   it('handles settings click', () => {
     expect(spySettings.call.length).toEqual(1);
+  });
+
+  it('handles color change click', () => {
+    expect(spyColor.call.length).toEqual(1);
   });
 });
