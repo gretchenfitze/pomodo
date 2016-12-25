@@ -14,7 +14,9 @@ export class TimerContainer extends React.Component {
   constructor({ timerType, onTimerReset }) {
     super();
     onTimerReset(timerType);
-    Notification.requestPermission();
+    if ('Notification' in window) {
+      Notification.requestPermission();
+    }
   }
 
   componentWillReceiveProps({ timerType, onTimerReset }) {
